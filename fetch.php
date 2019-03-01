@@ -1,5 +1,7 @@
-<?
+<?php
+
 include("../central/mysqli.php");
+
 date_default_timezone_set('Europe/Dublin');
 ini_set('display_errors', '1');
 ini_set('allow_url_fopen', '1');//*ideally unnecessary

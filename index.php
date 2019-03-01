@@ -34,7 +34,7 @@ ob_start("ob_gzhandler");
 	  <script src="js/multirange.js"></script>
  	<link rel="stylesheet" href="css/multirange.css" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<?
+<?php
 //*could and should be replaced by JS
 $Y=date("Y");
 $m=date("m");
@@ -74,9 +74,9 @@ for($a=0;$a<=50;$a++){
 	  }
 	}
 
-	<?echo $datestr;?>
+	<?php echo $datestr;?>
 
-	<?echo $datestr2;?>
+	<?php echo $datestr2;?>
 	
 	//**to show the dates on the date range slider
 	function showDate(){
@@ -105,7 +105,7 @@ for($a=0;$a<=50;$a++){
 	<div style="color:white;padding-top:8px">
 		Date Range:
 		<input type="range" id="dslider" multiple value="0,100" onchange="showDate()"/>
-		<span id="drange"><?echo "$start - $end";?></span>
+		<span id="drange"><?php echo "$start - $end";?></span>
 	</div>
       <a class="nav-item nav-link" href="contact.html">Contact</a>
       <a class="nav-item nav-link disabled" href="#">Disabled</a>
@@ -119,7 +119,7 @@ for($a=0;$a<=50;$a++){
 	//**map setup code
 	var mymap = L.map('mapid').setView([53.3498, -6.2603], 9);
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery Â© <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1IjoiaWJpcyIsImEiOiJjanJnNnc4ZXMxMjl6NDRwOGU5cnFyNTdjIn0.kDcWA40RF18x99tMlx9UQA'
