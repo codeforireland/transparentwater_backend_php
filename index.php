@@ -31,26 +31,8 @@ ob_start("ob_gzhandler");
 	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
 	  integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
 	  crossorigin=""></script>
-	  <script src="js/multirange.js"></script>
- 	<link rel="stylesheet" href="css/multirange.css" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<?
-//*could and should be replaced by JS
-$Y=date("Y");
-$m=date("m");
-$M=date("M");
-$d=date("d");
-$datestr="dates=[];";
-$datestr2="dates2=[];";
-for($a=0;$a<=50;$a++){
-	$date=date("D j M",mktime(0,0,0,$m,($d+$a),$Y));
-	$date2=date("U",mktime(0,0,0,$m,($d+$a),$Y));
-	if($a==0){$start=$date;}
-	if($a==50){$end=$date;}
-	$datestr.="\ndates[$a]='$date';";
-	$datestr2.="\ndates2[$a]=$date2"."000".";";
-}
-?>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 	<SCRIPT LANGUAGE="JavaScript">
 	<!--
 	//**Service Worker code
@@ -73,21 +55,6 @@ for($a=0;$a<=50;$a++){
 		//x.innerHTML = "Geolocation is not supported by this browser.";
 	  }
 	}
-
-	<?echo $datestr;?>
-
-	<?echo $datestr2;?>
-	
-	//**to show the dates on the date range slider
-	function showDate(){
-		val=document.getElementById('dslider').value.split(",");
-		start=dates[Math.round(val[0]/2)];
-		end=dates[Math.round(val[1]/2)];
-		document.getElementById('drange').innerHTML=start+" - "+end;
-		start=dates2[Math.round(val[0]/2)];
-		end=dates2[Math.round(val[1]/2)];
-		doDateRange(start,end);
-	}
 	
 	//-->
 	</SCRIPT>
@@ -104,7 +71,7 @@ for($a=0;$a<=50;$a++){
     <div class="navbar-nav">
 	<div style="color:white;padding-top:8px">
 		Date Range:
-		<input type="range" id="dslider" multiple value="0,100" onchange="showDate()"/>
+		<input type="text" class="input-sm form-control" name="date-range" />
 		<span id="drange"><?echo "$start - $end";?></span>
 	</div>
       <a class="nav-item nav-link" href="contact.html">Contact</a>
@@ -119,7 +86,7 @@ for($a=0;$a<=50;$a++){
 	//**map setup code
 	var mymap = L.map('mapid').setView([53.3498, -6.2603], 9);
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery Â© <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1IjoiaWJpcyIsImEiOiJjanJnNnc4ZXMxMjl6NDRwOGU5cnFyNTdjIn0.kDcWA40RF18x99tMlx9UQA'
@@ -245,5 +212,14 @@ function doDateRange(start,end){
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script>
+  $('input[name="date-range"]').daterangepicker({
+    autoApply: true
+  }, function(start, end) {
+    doDateRange(start.valueOf(), end.valueOf());
+  });
+</script>
 </body>
 </html>
